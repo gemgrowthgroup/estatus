@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use Auth;
+use App\Role;
 use App\User;
 
 class UserController extends Controller
@@ -15,7 +18,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('admin.users.index')->with('users', User::all());
+        return view('admin.users.index')->with(['users' => User::all(), 'roles' => Role::all()]);
     }
 
     /**
@@ -36,7 +39,17 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make('password'),
+        ]);
+
+        $role = Role::select('id')->where('id', $request->role_id)->first();
+
+        $user->roles()->attach($role);
+
+        return redirect('/admin/users');
     }
 
     /**
@@ -58,7 +71,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        if(Auth::user()->id == $id){
+            return redirect()->route('admin.users.index');
+        }
     }
 
     /**
@@ -70,7 +85,17 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if(Auth::user()->id == $id){
+            return redirect()->route('admin.users.index')->with('warning', 'You are not allowed to edit yourself.');
+        }
+
+        $user = User::find($id);
+        $user->roles()->sync($request->role);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->save();
+
+        return redirect('/admin/users')->with('success', 'You have successfully updated '.$user->name.'!');
     }
 
     /**

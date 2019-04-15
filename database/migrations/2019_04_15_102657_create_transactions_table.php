@@ -22,8 +22,9 @@ class CreateTransactionsTable extends Migration
             $table->date('from');
             $table->string('project');
             $table->string('origin');
-            $table->string('vehicle_type');
-            $table->string('status')->default('pending approval');
+            $table->integer('vehicle_type_id')->unsigned();
+            $table->integer('vehicle_id')->unsigned()->nullable();
+            $table->string('status')->default('Pending Approval');
             $table->date('return_date')->nullable();
             $table->timestamps();
         });

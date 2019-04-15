@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\Agent;
 
 use App\Transaction;
+use App\VehicleType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class RouteController extends Controller
 {
     public function index(){
-    	return view('agent.index')->with('transactions', Transaction::all());
+    	return view('agent.index')->with(['transactions' => Transaction::all(), 'types' => VehicleType::all()]);
     }
 
     public function profile(){

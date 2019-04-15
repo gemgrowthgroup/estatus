@@ -11,7 +11,7 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                    <i class="fas fa-car"></i>
                 </div>
                 <div class="sidebar-brand-text mx-3">{{ config('app.name', 'Laravel') }}</div>
             </a>
@@ -32,12 +32,16 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Administrative
+                Adminn Area
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                <a class="nav-link" href="/admin/vehicles">
+                    <i class="fas fa-fw fa-car"></i>
+                    <span>Vehicles</span>
+                </a>
+                {{-- <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-car"></i>
                     <span>Vehicles</span>
                 </a>
@@ -51,14 +55,14 @@
                         <a class="collapse-item" href="/brands">Car Brands</a>
                         <a class="collapse-item" href="/drivers">Drivers</a>
                     </div>
-                </div>
+                </div> --}}
             </li>
 
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="/personnel">
+                <a class="nav-link" href="/admin/users">
                     <i class="fas fa-fw fa-user"></i>
-                    <span>Personnel</span>
+                    <span>User Accounts</span>
                 </a>
                 {{-- <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-user"></i>
@@ -186,9 +190,11 @@
                             <i class="fas fa-bell fa-fw"></i>
 
                             <!-- Counter - Alerts -->
-                            <span class="badge badge-danger badge-counter">3+</span>
+                            @if(session('success') || session('warning'))
+                            <span class="badge badge-danger badge-counter">1</span>
+                            @endif
                         </a>
-
+                        @if(session('success'))
                         <!-- Dropdown - Alerts -->
                         <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
                             <h6 class="dropdown-header">Alerts Center</h6>
@@ -200,11 +206,11 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <div class="small text-gray-500">December 12, 2019</div>
-                                    <span class="font-weight-bold">Notification message here</span>
+                                    <div class="small text-gray-500">{{ date('l, F j, Y') }}</div>
+                                    <span class="font-weight-bold">{{session('success')}}</span>
                                 </div>
                             </a>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
+                            {{-- <a class="dropdown-item d-flex align-items-center" href="#">
                                 <div class="mr-3">
                                     <div class="icon-circle bg-success">
                                         <i class="fas fa-donate text-white"></i>
@@ -225,9 +231,10 @@
                                     <div class="small text-gray-500">December 2, 2019</div>
                                     Spending Alert: We've noticed unusually high spending for your account.
                                 </div>
-                            </a>
+                            </a> --}}
                             <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
                         </div>
+                        @endif
                     </li>
 
                     <!-- Nav Item - Messages -->
@@ -236,7 +243,7 @@
                             <i class="fas fa-envelope fa-fw"></i>
 
                             <!-- Counter - Messages -->
-                            <span class="badge badge-danger badge-counter">7</span>
+                            <span class="badge badge-danger badge-counter"></span>
                         </a>
                       
                         <!-- Dropdown - Messages -->

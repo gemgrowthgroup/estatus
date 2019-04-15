@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Vehicle;
+use App\VehicleType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -15,7 +16,7 @@ class VehicleController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.vehicles.index')->with(['vehicles' => Vehicle::all(), 'types' => VehicleType::all()]);
     }
 
     /**

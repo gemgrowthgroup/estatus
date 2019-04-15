@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Agent;
 use Auth;
 use Str;
 use App\Transaction;
+use App\Vehicle;
+use App\VehicleType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -41,21 +43,21 @@ class TransactionController extends Controller
         $user = Auth::user();
 
         $transaction = Transaction::create([
-            'reference' => str_random(12),
+            'reference' => strtoupper(str_random(6)),
             'requested_by' => $user->name,
             'user_id' => $user->id,
             'client' => $request->client,
             'from' => $request->from,
             'project' => $request->project,
             'origin' => $request->origin,
-            'vehicle_type' => $request->vehicle_type           
+            'vehicle_type_id' => $request->vehicle_type,          
         ]);
 
         
         $user->transactions()->attach($transaction);
 
 
-        return redirect()->route('agent.index')->with(['success' => 'You have successfully submitted a vehicle request. Please contact your manager for faster approval.', 'transactions' => Transaction::all()]);
+        return redirect()->route('agent.index')->with(['success' => 'You have successfully submitted a vehicle request for '.$request->client.'. Please contact your manager for faster approval.', 'transactions' => Transaction::all(), 'types' => VehicleType::all()]);
     }
 
     /**
@@ -89,7 +91,7 @@ class TransactionController extends Controller
      */
     public function update(Request $request, Transaction $transaction)
     {
-        //
+        
     }
 
     /**
@@ -98,8 +100,14 @@ class TransactionController extends Controller
      * @param  \App\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Transaction $transaction)
+    public function destroy($id)
     {
-        //
+        // dd($id);
+        $role = implode(', ', Auth::user()->roles()->get()->pluck('name')->toArray());
+        $transaction = Transaction::find($id);
+        $transaction->status = 'Cancelled';
+        $transaction->save();
+
+        return redirect()->route('agent.index')->with(['success' => 'You have successfully cancelled your vehicle request.', 'transactions' => Transaction::all(), 'types' => VehicleType::all()]);
     }
 }

@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Agent;
+namespace App\Http\Controllers\Admin;
 
-use App\Vehicle;
 use App\VehicleType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class VehicleController extends Controller
+class VehicleTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +15,7 @@ class VehicleController extends Controller
      */
     public function index()
     {
-        return view('agent.vehicles.index')->with(['vehicles' => Vehicle::all(), 'types' => VehicleType::all()]);
+        //
     }
 
     /**
@@ -43,10 +42,10 @@ class VehicleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Vehicle  $vehicle
+     * @param  \App\VehicleType  $vehicleType
      * @return \Illuminate\Http\Response
      */
-    public function show(Vehicle $vehicle)
+    public function show(VehicleType $vehicleType)
     {
         //
     }
@@ -54,10 +53,10 @@ class VehicleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Vehicle  $vehicle
+     * @param  \App\VehicleType  $vehicleType
      * @return \Illuminate\Http\Response
      */
-    public function edit(Vehicle $vehicle)
+    public function edit(VehicleType $vehicleType)
     {
         //
     }
@@ -66,10 +65,10 @@ class VehicleController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Vehicle  $vehicle
+     * @param  \App\VehicleType  $vehicleType
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Vehicle $vehicle)
+    public function update(Request $request, VehicleType $vehicleType)
     {
         //
     }
@@ -77,10 +76,10 @@ class VehicleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Vehicle  $vehicle
+     * @param  \App\VehicleType  $vehicleType
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Vehicle $vehicle)
+    public function destroy(VehicleType $vehicleType)
     {
         //
     }
