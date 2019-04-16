@@ -119,43 +119,86 @@
 					</tfoot>
 					<tbody>
 						@foreach($transactions as $transaction)
+                        @if($transaction->user_id == Auth::user()->id)
 							<tr>
 							<td>{{$transaction->reference}}</td>
 							<td>{{$transaction->client}}</td>
 							<td>{{$transaction->project}}</td>
 							<td>{{$transaction->status}}</td>
                             <td>
-                                @if($transaction->status != 'Cancelled' && $transaction->status != 'Vehicle Deployed')
-                                <a href="#" class="btn btn-primary btn-sm btn-icon-split editRequest" data-toggle="modal" data-target="#editRequest" data-id="{{ $transaction->id}}" data-client="{{ $transaction->client }}" data-project="{{ $transaction->project }}" data-from="{{ $transaction->from }}" data-pickup="{{ $transaction->origin}}" data-vehicle="{{ $transaction->vehicle_type_id }}">
-                                    <span class="icon text-white-50">
-                                        <i class="fas fa-edit"></i>
-                                    </span>
-                                    <span class="text">Edit</span>
-                                </a>                                
-                                <a href="#" class="btn btn-danger btn-sm btn-icon-split cancelRequest" data-toggle="modal" data-target="#cancelRequest" data-id="{{ $transaction->id}}">
-                                    <span class="icon text-white-50">
-                                        <i class="fas fa-times"></i>
-                                    </span>
-                                    <span class="text">Cancel</span>
-                                </a>
-                                @elseif($transaction->status != 'Cancelled' && $transaction->status == 'Vehicle Deployed')
-                                <a href="#" class="btn btn-info btn-sm btn-icon-split viewInfo" data-toggle="modal" data-target="#viewInfo" data-id="{{ $transaction->id}}" data-client="{{ $transaction->client }}" data-project="{{ $transaction->project }}" data-from="{{ $transaction->from }}" data-pickup="{{ $transaction->origin}}" data-vehicle="{{ $transaction->vehicle_type_id }}">
-                                    <span class="icon text-white-50">
-                                        <i class="fas fa-car"></i>
-                                    </span>
-                                    <span class="text">Return Vehicle</span>
-                                </a>                                 
-                                @else
-                                <a href="#" class="btn btn-secondary btn-sm btn-icon-split viewInfo" data-toggle="modal" data-target="#viewInfo" data-id="{{ $transaction->id}}" data-client="{{ $transaction->client }}" data-project="{{ $transaction->project }}" data-from="{{ $transaction->from }}" data-pickup="{{ $transaction->origin}}" data-vehicle="{{ $transaction->vehicle_type_id }}">
-                                    <span class="icon text-white-50">
-                                        <i class="fas fa-eye"></i>
-                                    </span>
-                                    <span class="text">View Information</span>
-                                </a>  
+                                @switch($transaction->status)
+                                    @case('Deployed')
+                                        <a href="#" class="btn btn-info btn-sm btn-icon-split returnVehicle" data-toggle="modal" data-target="#returnVehicle" data-id="{{ $transaction->id}}" data-client="{{ $transaction->client }}" >
+                                            <span class="icon text-white-50">
+                                                <i class="fas fa-car"></i>
+                                            </span>
+                                            <span class="text">Return Vehicle</span>
+                                        </a> 
+                                    @break
 
-                                @endif
+                                    @case('Approved for Deployment')
+                                        <a href="#" class="btn btn-secondary btn-sm btn-icon-split viewInfo" data-toggle="modal" data-target="#viewInfo" data-id="{{ $transaction->id}}" data-client="{{ $transaction->client }}" data-project="{{ $transaction->project }}" data-from="{{ $transaction->from }}" data-pickup="{{ $transaction->origin}}" data-vehicle="{{ $transaction->vehicle_type_id }}">
+                                            <span class="icon text-white-50">
+                                                <i class="fas fa-car"></i>
+                                            </span>
+                                            <span class="text">View Details</span>
+                                        </a>  
+                                    @break
+
+                                    @case('Cancelled')
+                                        <a href="#" class="btn btn-secondary btn-sm btn-icon-split viewInfo" data-toggle="modal" data-target="#viewInfo" data-id="{{ $transaction->id}}" data-client="{{ $transaction->client }}" data-project="{{ $transaction->project }}" data-from="{{ $transaction->from }}" data-pickup="{{ $transaction->origin}}" data-vehicle="{{ $transaction->vehicle_type_id }}">
+                                            <span class="icon text-white-50">
+                                                <i class="fas fa-car"></i>
+                                            </span>
+                                            <span class="text">View Details</span>
+                                        </a> 
+                                    @break
+
+                                    @case('Completed')
+                                        <a href="#" class="btn btn-secondary btn-sm btn-icon-split viewInfo" data-toggle="modal" data-target="#viewInfo" data-id="{{ $transaction->id}}" data-client="{{ $transaction->client }}" data-project="{{ $transaction->project }}" data-from="{{ $transaction->from }}" data-pickup="{{ $transaction->origin}}" data-vehicle="{{ $transaction->vehicle_type_id }}">
+                                            <span class="icon text-white-50">
+                                                <i class="fas fa-car"></i>
+                                            </span>
+                                            <span class="text">View Details</span>
+                                        </a>
+                                    @break
+
+                                    @case('Vehicle Returned')
+                                        <a href="#" class="btn btn-secondary btn-sm btn-icon-split viewInfo" data-toggle="modal" data-target="#viewInfo" data-id="{{ $transaction->id}}" data-client="{{ $transaction->client }}" data-project="{{ $transaction->project }}" data-from="{{ $transaction->from }}" data-pickup="{{ $transaction->origin}}" data-vehicle="{{ $transaction->vehicle_type_id }}">
+                                            <span class="icon text-white-50">
+                                                <i class="fas fa-car"></i>
+                                            </span>
+                                            <span class="text">View Details</span>
+                                        </a>
+                                    @break
+
+                                    @case('Pending Approval')
+                                        <a href="#" class="btn btn-primary btn-sm btn-icon-split editRequest" data-toggle="modal" data-target="#editRequest" data-id="{{ $transaction->id}}" data-client="{{ $transaction->client }}" data-project="{{ $transaction->project }}" data-from="{{ $transaction->from }}" data-pickup="{{ $transaction->origin}}" data-vehicle="{{ $transaction->vehicle_type_id }}">
+                                            <span class="icon text-white-50">
+                                                <i class="fas fa-edit"></i>
+                                            </span>
+                                            <span class="text">Edit</span>
+                                        </a>                                
+                                        <a href="#" class="btn btn-danger btn-sm btn-icon-split cancelRequest" data-toggle="modal" data-target="#cancelRequest" data-id="{{ $transaction->id}}">
+                                            <span class="icon text-white-50">
+                                                <i class="fas fa-times"></i>
+                                            </span>
+                                            <span class="text">Cancel</span>
+                                        </a>
+                                    @break
+
+                                    @default
+                                        <a href="#" class="btn btn-secondary btn-sm btn-icon-split viewInfo" data-toggle="modal" data-target="#viewInfo" data-id="{{ $transaction->id}}" data-client="{{ $transaction->client }}" data-project="{{ $transaction->project }}" data-from="{{ $transaction->from }}" data-pickup="{{ $transaction->origin}}" data-vehicle="{{ $transaction->vehicle_type_id }}">
+                                            <span class="icon text-white-50">
+                                                <i class="fas fa-car"></i>
+                                            </span>
+                                            <span class="text">View Details</span>
+                                        </a>
+                                    @break
+                                @endswitch                               
                             </td>
 							</tr>
+                        @endif
 						@endforeach
 					</tbody>
 				</table>
@@ -163,6 +206,121 @@
 		</div>
 	</div>
 </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="editRequest">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">        
+            <form method="post" class="user" id="editRequestForm">
+                @csrf
+                @method('patch')
+                <div class="modal-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary modal-title">Edit Request Details</h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body py-3">
+                    <input type="text" name="type" value="edit" class="d-none">
+                    <div class="form-group">    
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend" style="width:35%">
+                                <span class="input-group-text bg-primary text-white" style="width:100%">From</span>
+                            </div>
+                            <input id="editfrom" type="date" class="form-control" name="from" required autofocus>   
+                        </div>              
+                    </div>
+                                    
+                    <div class="form-group">                        
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend" style="width:35%">
+                                <span class="input-group-text bg-primary text-white" style="width:100%">Client</span>
+                            </div>
+                            <input id="editclient" type="text" class="form-control" name="client" required autofocus>
+                        </div>
+                    </div>
+                    <div class="form-group">                        
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend" style="width:35%">
+                                <span class="input-group-text bg-primary text-white" style="width:100%">Project</span>
+                            </div>
+                            <input id="editproject" type="text" class="form-control" name="project" required autofocus>
+                        </div>
+                    </div>
+                    <div class="form-group">                        
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend" style="width:35%">
+                                <span class="input-group-text bg-primary text-white" style="width:100%">Pick-up</span>
+                            </div>
+                            <input id="editorigin" type="text" class="form-control" name="origin" required autofocus>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend" style="width:35%">
+                                <span class="input-group-text bg-primary text-white" style="width:100%">Vehicle</span>
+                            </div>
+                            <select id="editvehicle" name="vehicle_type" class="custom-select">
+                                @foreach($types as $type)
+                                    <option value="{{$type->id}}">{{$type->name}}</option>
+                                @endforeach
+                            </select>   
+                        </div>                  
+                    </div>         
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-icon-split" data-dismiss="modal">
+                        <span class="icon text-white-50">
+                          <i class="fas fa-times"></i>
+                        </span>
+                        <span class="text">Close</span>
+                    </button>
+                    <button type="submit" class="btn btn-primary btn-icon-split">
+                        <span class="icon text-white-50">
+                          <i class="fas fa-check"></i>
+                        </span>
+                        <span class="text">Submit Changes</span>
+                    </button>
+                </div> 
+            </form>        
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="returnVehicle">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">        
+            <form method="post" class="user" id="returnVehicleForm">
+                @csrf
+                @method('patch')
+                <div class="modal-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary modal-title">Confirmation</h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body py-3">
+                    <input type="text" name="type" value="return" class="d-none">           
+                    <p id="returnVehicleMessage">You are returning the vehicle requested.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-icon-split" data-dismiss="modal">
+                        <span class="icon text-white-50">
+                          <i class="fas fa-times"></i>
+                        </span>
+                        <span class="text">Close</span>
+                    </button>
+                    <button type="submit" class="btn btn-primary btn-icon-split">
+                        <span class="icon text-white-50">
+                          <i class="fas fa-check"></i>
+                        </span>
+                        <span class="text">Confirm</span>
+                    </button>
+                </div> 
+            </form>        
+        </div>
+    </div>
 </div>
 
 <div class="modal fade" tabindex="-1" role="dialog" id="cancelRequest">
@@ -200,21 +358,25 @@
 </div>
 
 <script type="text/javascript">
-    let editButtons = document.querySelectorAll('.editButton');
+    let editButtons = document.querySelectorAll('.editRequest');
 
     editButtons.forEach(function (editButton){
         editButton.addEventListener('click', function(){
 
             let editId = editButton.getAttribute('data-id');
-            let name = editButton.getAttribute('data-name');
-            let email = editButton.getAttribute('data-email');
-            let role = editButton.getAttribute('data-role');
+            let client = editButton.getAttribute('data-client');
+            let fromDate = editButton.getAttribute('data-from');
+            let project = editButton.getAttribute('data-project');
+            let origin = editButton.getAttribute('data-pickup');
+            let vehicle = editButton.getAttribute('data-vehicle');
 
-            document.querySelector('#editname').setAttribute('value', name);
-            document.querySelector('#editemail').setAttribute('value', email);
-            document.querySelector('#editrole').value = editButton.getAttribute('data-role');
+            document.querySelector('#editclient').setAttribute('value', client);
+            document.querySelector('#editfrom').setAttribute('value', fromDate);
+            document.querySelector('#editproject').setAttribute('value', project);
+            document.querySelector('#editorigin').setAttribute('value', origin);
+            document.querySelector('#editvehicle').value = vehicle;
             
-            document.querySelector('#editUserForm').setAttribute('action', '/admin/users/' + editId);
+            document.querySelector('#editRequestForm').setAttribute('action', '/agent/transactions/' + editId);
         });
     });
 
@@ -222,12 +384,23 @@
     let cancelButtons = document.querySelectorAll('.cancelRequest');
 
     cancelButtons.forEach(function(cancelButton){
-
-        let cancelId = cancelButton.getAttribute('data-id');
-
         cancelButton.addEventListener('click', function(){
+            let cancelId = cancelButton.getAttribute('data-id');
             document.querySelector('#cancelRequestForm').setAttribute('action', '/agent/transactions/'+cancelId);
         });
     });
+
+    let returnButtons = document.querySelectorAll('.returnVehicle');
+
+    returnButtons.forEach(function(returnButton){
+        returnButton.addEventListener('click', function(){
+            let returnID = returnButton.getAttribute('data-id');
+            let clientName = returnButton.getAttribute('data-client');
+
+
+            document.querySelector('#returnVehicleMessage').innerHTML = 'Press the "Confirm" button if you are returning the vehicle you requested for '+clientName+'.';
+            document.querySelector('#returnVehicleForm').setAttribute('action', '/agent/transactions/'+returnID);
+        })
+    })
 </script>
 @endsection

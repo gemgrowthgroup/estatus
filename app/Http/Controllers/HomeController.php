@@ -13,10 +13,10 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth')->except('index');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth')->except('index');
+    // }
 
     /**
      * Show the application dashboard.
@@ -25,15 +25,20 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if(Auth::user() == null) {
+        $user = Auth::user();
+
+        if(!$user){
             return view('auth.login');
-        } else {
-            if(Auth::user()->hasAnyRole('Super Admin')){
+        }
+
+        else{
+            // dd($user->hasAnyRole('Driver'));
+            if($user->hasAnyRole('Super')){
 
                 return redirect('/super');
 
-            } elseif(Auth::user()->hasAnyRole('Administrator')){
-
+            } elseif(Auth::user()->hasAnyRole('Admin')){
+                
                 return redirect('/admin');
 
             } elseif(Auth::user()->hasAnyRole('Director')){
@@ -49,11 +54,11 @@ class HomeController extends Controller
                 return redirect('/agent');
 
             } else{
-
+                
                 return redirect('/driver');
 
             }
-        }
+        }        
         
     }
 }

@@ -2,11 +2,14 @@
 
 namespace App;
 
+use Auth;
+use Spatie\Searchable\Searchable;
+use Spatie\Searchable\SearchResult;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements Searchable
 {
     use Notifiable;
 
@@ -15,6 +18,10 @@ class User extends Authenticatable
      *
      * @var array
      */
+
+    protected $table = 'users';
+
+
     protected $fillable = [
         'name', 'email', 'password',
     ];
@@ -55,5 +62,17 @@ class User extends Authenticatable
 
     public function hasAnyRole($role){
         return null !== $this->roles()->where('name', $role)->first();
+    }
+ 
+    public function getSearchResult(): SearchResult
+    {
+        $role = strtolower(implode(', ', Auth::user()->roles()->pluck('name')->toArray()));
+        $url = route($role.'.users.show', $this->id);
+ 
+        return new SearchResult(
+            $this,
+            $this->name,
+            $url
+        );
     }
 }

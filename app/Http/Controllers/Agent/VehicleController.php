@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Agent;
 
+use Auth;
 use App\Vehicle;
 use App\VehicleType;
 use Illuminate\Http\Request;

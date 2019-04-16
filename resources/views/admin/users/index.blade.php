@@ -51,8 +51,8 @@
                 </tfoot>
                 <tbody>
                     @foreach($users as $user)
-                        @if(!$user->hasAnyRole('Super Admin'))
-                        @if(!$user->hasAnyRole('Administrator'))
+                        @if(!$user->hasAnyRole('Super'))
+                        @if(!$user->hasAnyRole('Admin'))
                         <tr>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>

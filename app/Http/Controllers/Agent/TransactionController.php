@@ -89,8 +89,33 @@ class TransactionController extends Controller
      * @param  \App\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Transaction $transaction)
+    public function update($id, Request $request)
     {
+        if($request->type == 'return'){
+            $transaction = Transaction::find($id);
+            $transaction->status = 'Vehicle Returned';
+            $transaction->return_date = now();
+
+            $vehicle = $transaction->vehicle_id;
+            $myVehicle = Vehicle::where('id', $vehicle)->get()->pluck('name');
+
+
+            $transaction->save();
+
+            return redirect()->route('agent.index')->with(['success' => 'You have successfully returned the '.$myVehicle.' you requested.', 'transactions' => Transaction::all(), 'types' => VehicleType::all()]);
+        }
+
+        if($request->type == 'edit'){
+            $transaction = Transaction::find($id);
+            $transaction->client = $request->client;
+            $transaction->from = $request->from;
+            $transaction->project = $request->project;
+            $transaction->origin = $request->origin;
+            $transaction->vehicle_type_id = $request->vehicle_type;
+            $transaction->save();
+
+            return redirect()->route('agent.index')->with(['success' => 'You have successfully updated the vehicle request for '.$transaction->client.'.', 'transactions' => Transaction::all(), 'types' => VehicleType::all()]);
+        }        
         
     }
 

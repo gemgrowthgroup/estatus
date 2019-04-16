@@ -1,11 +1,12 @@
-@extends('layouts.admin')
+@extends('layouts.agent')
 
-@section('admin-content')
+@section('agent-content')
 <div class="row">
     <div class="col-md-10">
         
         @if ( $searchResults-> isEmpty())
             <h5>Sorry, no results found for the term <b>"{{ $searchterm }}"</b>.</h5>
+            <p class="lead">Wag hanapin, kusa daw yun dumarating. Pero pag 'di dumating, baka talagang ganyan na tadhana mo.</p>
         @else
             <h5>There are {{ $searchResults->count() }} results for the term <b>"{{ $searchterm }}"</b></h5>
             <hr />
@@ -21,5 +22,4 @@
         @endif
     </div>
 </div>
-
 @endsection

@@ -30,7 +30,7 @@
             		</tr>
           		</tfoot>
           		<tbody>
-                    @foreach($vehicles as $vehicle)
+                    @foreach($vehicles as $vehicle)                        
                         @if($vehicle->status == 'enabled')
                         	<tr>
                         		<td>{{ $vehicle->name }}</td>
@@ -43,7 +43,7 @@
                                 </td>        
                                 <td>{{ $vehicle->description }}</td>            		
                         	</tr>
-                        @endif
+                        @endif                        
                     @endforeach
           		</tbody>
         	</table>

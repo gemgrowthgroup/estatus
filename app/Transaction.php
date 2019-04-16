@@ -2,13 +2,30 @@
 
 namespace App;
 
+use Auth;
+use Spatie\Searchable\Searchable;
+use Spatie\Searchable\SearchResult;
 use Illuminate\Database\Eloquent\Model;
 
-class Transaction extends Model
+class Transaction extends Model implements Searchable
 {
-	protected $fillable = [
+	protected $table = 'transactions';
+ 
+    protected $fillable = [
 		'reference', 'requested_by', 'user_id', 'client', 'from', 'project', 'origin', 'vehicle_type_id'
 	];
+ 
+    public function getSearchResult(): SearchResult
+    {
+    	$role = strtolower(implode(', ', Auth::user()->roles()->pluck('name')->toArray()));
+        $url = route($role.'.transactions.show', $this->id);
+ 
+        return new SearchResult(
+            $this,
+            $this->client,
+            $url
+        );
+    }
 
     public function users(){
     	return $this->belongsToMany('App\User');

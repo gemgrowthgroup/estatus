@@ -17,8 +17,8 @@ class UsersTableSeeder extends Seeder
         User::truncate();
         DB::table('role_user')->truncate();
 
-        $superAdminRole = Role::where('name', 'Super Admin')->first();
-        $adminRole = Role::where('name', 'Administrator')->first();
+        $superAdminRole = Role::where('name', 'Super')->first();
+        $adminRole = Role::where('name', 'Admin')->first();
         $directorRole = Role::where('name', 'Director')->first();
         $managerRole = Role::where('name', 'Manager')->first();
         $agentRole = Role::where('name', 'Agent')->first();
