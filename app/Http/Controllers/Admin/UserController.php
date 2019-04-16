@@ -49,7 +49,7 @@ class UserController extends Controller
 
         $user->roles()->attach($role);
 
-        return redirect('/admin/users');
+        return redirect('/admin/users')->with('success', 'You have successfully created a new user: '.$user->name);
     }
 
     /**
