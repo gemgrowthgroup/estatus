@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>@yield('title', 'E-Status | Real Estate Asset Management')</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -24,7 +24,45 @@
 
 </head>
 <body id="page-top">
-    @yield('content')
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        @switch($role)
+            @case('admin')
+                @include('partials.admin-sidebar')
+            @break
+
+            @case('director')
+                @include('partials.director-sidebar')
+            @break
+
+            @case('agent')
+                @include('partials.agent-sidebar')
+            @break
+        @endswitch
+        
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            @include('partials.top-nav')
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                @yield('content')
+            </div>
+            <!-- /.container-fluid -->
+            
+        </div>
+        <!-- End of Main Content -->
+
+        @include('partials.footer')
+    </div>
+    <!-- End of Content Wrapper -->
+    
 </div>
 <!-- End of Page Wrapper -->
 

@@ -1,6 +1,8 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
-@section('admin-content')
+@section('title', 'Activities | E-Status Real Estate Asset Management')
+
+@section('content')
 
 
 @endsection

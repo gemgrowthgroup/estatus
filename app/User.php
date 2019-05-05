@@ -48,7 +48,11 @@ class User extends Authenticatable implements Searchable
         return $this->belongsToMany('App\Role');
     }
 
-    public function agency(){
+    public function profile(){
+        return $this->hasOne('App\Profile');
+    }
+
+    public function agencies(){
         return $this->belongsToMany('App\Agency');
     }
 

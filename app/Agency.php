@@ -11,9 +11,7 @@ class Agency extends Model implements Searchable
 {
 	protected $table = 'agencies';
  
-    protected $fillable = [
-		'name', 'about', 'logo', 'established', 'address', 'phone', 'fax', 'email', 'website', 'fb_page'
-	];
+    protected $guarded = [];
  
     public function getSearchResult(): SearchResult
     {
@@ -33,5 +31,9 @@ class Agency extends Model implements Searchable
 
     public function vehicles(){
     	return $this->belongsToMany('App\Vehicle');
+    }
+
+    public function transactions(){
+        return $this->hasMany('App\Transaction');
     }
 }

@@ -69,3 +69,8 @@ input:checked + .slider:before {
 .bg-login-image {
   background: url('../images/dog.jpeg');
 }
+
+.decline-warning {
+  font-size: 4em;
+  padding: 14px 16px;
+}

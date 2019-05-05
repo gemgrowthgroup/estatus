@@ -14,7 +14,15 @@
 
 Auth::routes();
 
-Route::get('/', 'HomeController@index');
+Route::get('/', 'HomeController@index')->name('index');
+
+// Route::get('/', function(){
+// 	\App\Asset::truncate();
+// 	factory(\App\Asset::class, 40)->create();
+
+		
+
+// });
 
 
 
@@ -31,6 +39,7 @@ Route::namespace('Super')->prefix('super')->middleware(['auth', 'auth.super'])->
 Route::namespace('Admin')->prefix('admin')->middleware(['auth', 'auth.admin'])->name('admin.')->group(function(){
 	Route::resources([
 		'/users' => 'UserController',
+		'/assets' => 'AssetController',
 		'/vehicles' => 'VehicleController',
 		'/transactions' => 'TransactionController',
 	]);
@@ -41,10 +50,15 @@ Route::namespace('Admin')->prefix('admin')->middleware(['auth', 'auth.admin'])->
 });
 
 Route::namespace('Director')->prefix('director')->middleware(['auth', 'auth.director'])->name('director.')->group(function(){
-	Route::resource('/users', 'UserController');
+	Route::resources([
+		'/users' => 'UserController',
+		'/vehicles' => 'VehicleController',
+		'/transactions' => 'TransactionController',
+	]);
 	Route::get('/profile', 'RouteController@profile');
 	Route::get('/settings', 'RouteController@settings');
 	Route::get('/activities', 'RouteController@activities');
+	Route::get('/search', 'SearchController@search')->name('search.result');
 });
 
 Route::namespace('Manager')->prefix('manager')->middleware(['auth', 'auth.manager'])->name('manager.')->group(function(){
@@ -77,5 +91,5 @@ Route::get('/super', 'Super\RouteController@index')->middleware(['auth', 'auth.s
 Route::get('/admin', 'Admin\RouteController@index')->middleware(['auth', 'auth.admin']);
 Route::get('/director', 'Director\RouteController@index')->middleware(['auth', 'auth.director']);
 Route::get('/manager', 'Manager\RouteController@index')->middleware(['auth', 'auth.manager']);
-Route::get('/agent', 'Agent\RouteController@index')->middleware(['auth', 'auth.agent'])->name('agent.index');
+Route::get('/agent', 'Agent\RouteController@index')->middleware(['auth', 'auth.agent']);
 Route::get('/driver', 'Driver\RouteController@index')->middleware(['auth', 'auth.driver']);

@@ -17,7 +17,11 @@ class VehicleController extends Controller
      */
     public function index()
     {
-        return view('agent.vehicles.index')->with(['vehicles' => Vehicle::all(), 'types' => VehicleType::all()]);
+        $role = 'agent';
+        $vehicles = Vehicle::all();
+        $types = VehicleType::all();
+        $agency = Auth::user()->agencies()->first();
+        return view('agent.vehicles.index', compact('role', 'vehicles', 'types', 'agency'));
     }
 
     /**

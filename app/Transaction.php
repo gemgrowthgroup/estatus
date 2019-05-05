@@ -30,4 +30,16 @@ class Transaction extends Model implements Searchable
     public function users(){
     	return $this->belongsToMany('App\User');
     }
+
+    public function status(){
+        return $this->belongsToMany('App\Status');
+    }
+
+    public function agency(){
+        return $this->belongsTo('App\Agency');
+    }
+
+    public function vehicle(){
+        return $this->hasMany('App\Vehicle');
+    }
 }

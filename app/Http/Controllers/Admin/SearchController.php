@@ -26,7 +26,7 @@ class SearchController extends Controller
                     ->registerModel(Transaction::class, 'client', 'requested_by', 'project', 'origin')
                     ->registerModel(User::class, 'name' ,'email')
                     ->perform($request->input('query'));
- 
-        return view('admin.search', compact('searchResults', 'searchterm'));
+        $role = 'admin';
+        return view('admin.search', compact('searchResults', 'searchterm', 'role'));
     }
 }

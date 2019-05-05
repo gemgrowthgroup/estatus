@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Hash;
 use Auth;
 use App\Role;
 use App\User;
+use App\Agency;
+use App\Profile;
 
 class UserController extends Controller
 {
@@ -18,7 +20,15 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('admin.users.index')->with(['users' => User::all(), 'roles' => Role::all()]);
+        $agencies = Auth::user()->agency()->get();
+
+        foreach($agencies as $agency){
+            $myAgency = $agency;
+        }
+
+        $employees = Agency::find($myAgency->id)->users()->get();
+
+        return view('admin.users.index')->with(['employees' => $employees, 'roles' => Role::all()]);
     }
 
     /**
@@ -48,6 +58,10 @@ class UserController extends Controller
         $role = Role::select('id')->where('id', $request->role_id)->first();
 
         $user->roles()->attach($role);
+
+        $profile = new Profile;
+
+        $user->profile()->save($profile);
 
         return redirect('/admin/users')->with('success', 'You have successfully created a new user: '.$user->name);
     }

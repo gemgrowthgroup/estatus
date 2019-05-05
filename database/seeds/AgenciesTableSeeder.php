@@ -15,9 +15,8 @@ class AgenciesTableSeeder extends Seeder
     public function run()
     {
         Agency::truncate();
-        DB::table('agency_user')->truncate();
         
 
-        factory(App\Agency::class, 5)->create();
+        factory(App\Agency::class, 3)->create();
     }
 }

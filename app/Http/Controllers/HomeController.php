@@ -32,7 +32,6 @@ class HomeController extends Controller
         }
 
         else{
-            // dd($user->hasAnyRole('Driver'));
             if($user->hasAnyRole('Super')){
 
                 return redirect('/super');

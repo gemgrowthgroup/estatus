@@ -1,6 +1,6 @@
-@extends('layouts.agent')
+@extends('layouts.app')
 
-@section('agent-content')
+@section('content')
 <div class="row">
     <div class="col-md-10">
         

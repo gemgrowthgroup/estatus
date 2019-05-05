@@ -1,4 +1,4 @@
-@extends('layouts.agent')
+@extends('layouts.app')
 
 
 @section('agent-content')

@@ -1,7 +1,7 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
 
-@section('admin-content')
+@section('content')
 
 <!-- Page Heading -->
 <h1 class="h3 mb-2 text-gray-800">User Accounts</h1>
@@ -50,7 +50,7 @@
                     </tr>
                 </tfoot>
                 <tbody>
-                    @foreach($users as $user)
+                    @foreach($employees as $user)
                         @if(!$user->hasAnyRole('Super'))
                         @if(!$user->hasAnyRole('Admin'))
                         <tr>

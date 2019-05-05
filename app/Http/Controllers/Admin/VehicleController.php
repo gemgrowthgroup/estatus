@@ -16,7 +16,10 @@ class VehicleController extends Controller
      */
     public function index()
     {
-        return view('admin.vehicles.index')->with(['vehicles' => Vehicle::all(), 'types' => VehicleType::all()]);
+        $vehicles = Vehicle::all();
+        $types = VehicleType::all();
+        $role = 'admin';
+        return view('admin.vehicles.index', compact('role', 'types', 'vehicles'));
     }
 
     /**
@@ -67,7 +70,9 @@ class VehicleController extends Controller
      */
     public function edit(Vehicle $vehicle)
     {
-        //
+        $types = VehicleType::all();
+        $role = 'admin';
+        return view('admin.vehicles.edit', compact('role', 'types', 'vehicle'));
     }
 
     /**
@@ -83,6 +88,8 @@ class VehicleController extends Controller
         $vehicle->name = $request->name;
         $vehicle->description = $request->description;
         $vehicle->vehicle_type_id = $request->vehicle_type_id;
+        $vehicle->units = $request->units;
+        $vehicle->deployed = $request->deployed;
         $vehicle->save();
 
         return redirect('/admin/vehicles')->with('success', 'You have successfully updated '.$vehicle->name.'.');

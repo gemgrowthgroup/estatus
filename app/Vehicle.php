@@ -25,11 +25,23 @@ class Vehicle extends Model implements Searchable
         );
     }
 
+    public function transactions(){
+        return $this->belongsTo('App\Transaction');
+    }
+
     public function agency(){
     	return $this->belongsToMany('App\Agency;');
     }
 
-    public function type(){
-        return $this->belongsToMany('App\VehicleType');
+    public function vehicletype(){
+        return $this->belongsTo('App\VehicleType');
+    }
+
+    public function choose($id){
+        return $this->where('vehicle_type_id', $id)->get();
+    }
+
+    public function assets(){
+        return $this->belongsToMany('App\Asset');
     }
 }

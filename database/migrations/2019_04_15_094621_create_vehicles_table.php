@@ -19,6 +19,9 @@ class CreateVehiclesTable extends Migration
             $table->longText('description')->nullable();
             $table->string('status')->default('enabled');
             $table->integer('vehicle_type_id')->unsigned()->nullable();
+            $table->string('available')->default('true');
+            $table->integer('units')->default(1);
+            $table->integer('deployed')->default(0);
             $table->timestamps();
         });
     }
