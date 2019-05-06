@@ -32,6 +32,13 @@
                                 <div class="p-5">
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                                        Demo Logins:<br>
+                                        Admin: admin@company.com<br>
+                                        Password: admin123<br>
+                                        Director: director@company.com<br>
+                                        Password: director123<br>
+                                        Agent: agent@company.com<br>
+                                        Password: agent123<br>
                                     </div>
                                     <form class="user" method="POST" action="{{ route('login') }}">
                                         @csrf
