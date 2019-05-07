@@ -53,6 +53,7 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request);
         $user = Auth::user();
         $agency = $user->agencies()->first();
         // dd($agency->id);
@@ -68,7 +69,7 @@ class TransactionController extends Controller
             'agency_id' => $agency->id  
         ]);
 
-        
+        $transaction->save();
         $user->transactions()->attach($transaction);
 
 
