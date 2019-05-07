@@ -32,6 +32,9 @@ class TransactionsTableSeeder extends Seeder
             'agency_id' => 1,
         ]);
 
+        $user = User::where('id', 17)->first();
+        $user->transactions()->attach($agent);
+
         $agentToo = Transaction::create([
         	'reference' => strtoupper(str_random(6)),
             'requested_by' => 'Paulichelle Iligan',
@@ -43,6 +46,9 @@ class TransactionsTableSeeder extends Seeder
             'vehicle_type_id' => 1, 
             'agency_id' => 1,
         ]);
+
+        $user = User::where('id', 18)->first();
+        $user->transactions()->attach($agentTwo);
 
         $agentThree = Transaction::create([
         	'reference' => strtoupper(str_random(6)),
@@ -56,6 +62,9 @@ class TransactionsTableSeeder extends Seeder
             'agency_id' => 1,
         ]);
 
+        $user = User::where('id', 19)->first();
+        $user->transactions()->attach($agentThree);
+
         $agentFour = Transaction::create([
         	'reference' => strtoupper(str_random(6)),
             'requested_by' => 'Geng Maderazo',
@@ -67,6 +76,9 @@ class TransactionsTableSeeder extends Seeder
             'vehicle_type_id' => 3, 
             'agency_id' => 1,
         ]);
+
+        $user = User::where('id', 20)->first();
+        $user->transactions()->attach($agentFour);
 
         $agentFive = Transaction::create([
         	'reference' => strtoupper(str_random(6)),
@@ -80,6 +92,9 @@ class TransactionsTableSeeder extends Seeder
             'agency_id' => 1,
         ]);
 
+        $user = User::where('id', 21)->first();
+        $user->transactions()->attach($agentFive);
+
         $agentSix = Transaction::create([
         	'reference' => strtoupper(str_random(6)),
             'requested_by' => 'Louise Belison',
@@ -91,6 +106,9 @@ class TransactionsTableSeeder extends Seeder
             'vehicle_type_id' => 1, 
             'agency_id' => 1,
         ]);
+
+        $user = User::where('id', 22)->first();
+        $user->transactions()->attach($agentSix);
 
         $agentSeven = Transaction::create([
         	'reference' => strtoupper(str_random(6)),
@@ -104,6 +122,9 @@ class TransactionsTableSeeder extends Seeder
             'agency_id' => 1,
         ]);
 
+        $user = User::where('id', 23)->first();
+        $user->transactions()->attach($agentSeven);
+
         $agentEight = Transaction::create([
         	'reference' => strtoupper(str_random(6)),
             'requested_by' => 'Jennifer Baldovino',
@@ -115,6 +136,9 @@ class TransactionsTableSeeder extends Seeder
             'vehicle_type_id' => 1, 
             'agency_id' => 1,
         ]);
+
+        $user = User::where('id', 24)->first();
+        $user->transactions()->attach($agentEight);
 
         $agentNine = Transaction::create([
         	'reference' => strtoupper(str_random(6)),
@@ -128,6 +152,9 @@ class TransactionsTableSeeder extends Seeder
             'agency_id' => 1,
         ]);
 
+        $user = User::where('id', 25)->first();
+        $user->transactions()->attach($agentNine);
+
         $agentTen = Transaction::create([
         	'reference' => strtoupper(str_random(6)),
             'requested_by' => 'Jhasfer Tenorio',
@@ -139,6 +166,9 @@ class TransactionsTableSeeder extends Seeder
             'vehicle_type_id' => 3, 
             'agency_id' => 2,
         ]);
+
+        $user = User::where('id', 26)->first();
+        $user->transactions()->attach($agentTen);
 
         $agentEleven = Transaction::create([
         	'reference' => strtoupper(str_random(6)),
@@ -152,6 +182,9 @@ class TransactionsTableSeeder extends Seeder
             'agency_id' => 2,
         ]);
 
+        $user = User::where('id', 27)->first();
+        $user->transactions()->attach($agentEleven);
+
         $agentTwelve = Transaction::create([
         	'reference' => strtoupper(str_random(6)),
             'requested_by' => 'Artemio Cruz',
@@ -164,10 +197,13 @@ class TransactionsTableSeeder extends Seeder
             'agency_id' => 2,
         ]);
 
+        $user = User::where('id', 28)->first();
+        $user->transactions()->attach($agentTwelve);
+
         $agentThirteen = Transaction::create([
         	'reference' => strtoupper(str_random(6)),
             'requested_by' => 'Lynette Faustino',
-            'user_id' => 28,
+            'user_id' => 29,
             'client' => 'Apollo Quiboloy',
             'from' => date('Y-m-d', $timestamp),
             'project' => 'Seventh Heaven Residences',
@@ -175,6 +211,9 @@ class TransactionsTableSeeder extends Seeder
             'vehicle_type_id' => 4, 
             'agency_id' => 2,
         ]);
+
+        $user = User::where('id', 29)->first();
+        $user->transactions()->attach($agentThirteen);
 
         $agentFourteen = Transaction::create([
         	'reference' => strtoupper(str_random(6)),
@@ -188,6 +227,9 @@ class TransactionsTableSeeder extends Seeder
             'agency_id' => 2,
         ]);
 
+        $user = User::where('id', 30)->first();
+        $user->transactions()->attach($agentFourteen);
+
         $agentFifteen = Transaction::create([
         	'reference' => strtoupper(str_random(6)),
             'requested_by' => 'Arah Isabel',
@@ -199,6 +241,9 @@ class TransactionsTableSeeder extends Seeder
             'vehicle_type_id' => 1, 
             'agency_id' => 2,
         ]);
+
+        $user = User::where('id', 31)->first();
+        $user->transactions()->attach($agentFifteen);
 
         $agentSixteen = Transaction::create([
         	'reference' => strtoupper(str_random(6)),
@@ -212,6 +257,9 @@ class TransactionsTableSeeder extends Seeder
             'agency_id' => 2,
         ]);
 
+        $user = User::where('id', 32)->first();
+        $user->transactions()->attach($agentSixteen);
+
         $agentSeventeen = Transaction::create([
         	'reference' => strtoupper(str_random(6)),
             'requested_by' => 'Sunshine Rademann',
@@ -223,6 +271,9 @@ class TransactionsTableSeeder extends Seeder
             'vehicle_type_id' => 1, 
             'agency_id' => 2,
         ]);
+
+        $user = User::where('id', 33)->first();
+        $user->transactions()->attach($agentSeventeen);
 
         $agentEighteen = Transaction::create([
         	'reference' => strtoupper(str_random(6)),
@@ -236,6 +287,9 @@ class TransactionsTableSeeder extends Seeder
             'agency_id' => 2,
         ]);
 
+        $user = User::where('id', 34)->first();
+        $user->transactions()->attach($agentEighteen);
+
         $agentNineteen = Transaction::create([
         	'reference' => strtoupper(str_random(6)),
             'requested_by' => 'Thoreen Holverson',
@@ -247,6 +301,9 @@ class TransactionsTableSeeder extends Seeder
             'vehicle_type_id' => 1, 
             'agency_id' => 3,
         ]);
+
+        $user = User::where('id', 35)->first();
+        $user->transactions()->attach($agentNineteen);
 
         $agentTwenty = Transaction::create([
         	'reference' => strtoupper(str_random(6)),
@@ -260,6 +317,9 @@ class TransactionsTableSeeder extends Seeder
             'agency_id' => 3,
         ]);
 
+        $user = User::where('id', 36)->first();
+        $user->transactions()->attach($agentTwenty);
+
         $agentTwentyOne = Transaction::create([
         	'reference' => strtoupper(str_random(6)),
             'requested_by' => 'Ziellza Acosta',
@@ -271,6 +331,9 @@ class TransactionsTableSeeder extends Seeder
             'vehicle_type_id' => 1, 
             'agency_id' => 3,
         ]);
+
+        $user = User::where('id', 37)->first();
+        $user->transactions()->attach($agentTwentyOne);
 
         $agentTwentyTwo = Transaction::create([
         	'reference' => strtoupper(str_random(6)),
@@ -284,6 +347,9 @@ class TransactionsTableSeeder extends Seeder
             'agency_id' => 3,
         ]);
 
+        $user = User::where('id', 38)->first();
+        $user->transactions()->attach($agentTwentyTwo);
+
         $agentTwentyThree = Transaction::create([
         	'reference' => strtoupper(str_random(6)),
             'requested_by' => 'Kristina Rose Navarro',
@@ -295,6 +361,9 @@ class TransactionsTableSeeder extends Seeder
             'vehicle_type_id' => 1, 
             'agency_id' => 3,
         ]);
+
+        $user = User::where('id', 39)->first();
+        $user->transactions()->attach($agentTwentyThree);
 
         $agentTwentyFour = Transaction::create([
         	'reference' => strtoupper(str_random(6)),
@@ -308,6 +377,9 @@ class TransactionsTableSeeder extends Seeder
             'agency_id' => 3,
         ]);
 
+        $user = User::where('id', 40)->first();
+        $user->transactions()->attach($agentTwentyFour);
+
         $agentTwentyFive = Transaction::create([
         	'reference' => strtoupper(str_random(6)),
             'requested_by' => 'Nica Dedicatoria',
@@ -319,6 +391,9 @@ class TransactionsTableSeeder extends Seeder
             'vehicle_type_id' => 1, 
             'agency_id' => 3,
         ]);
+
+        $user = User::where('id', 41)->first();
+        $user->transactions()->attach($agentTwentyFive);
 
         $agentTwentySix = Transaction::create([
         	'reference' => strtoupper(str_random(6)),
@@ -332,6 +407,9 @@ class TransactionsTableSeeder extends Seeder
             'agency_id' => 3,
         ]);
 
+        $user = User::where('id', 42)->first();
+        $user->transactions()->attach($agentTwentySix);
+
         $agentTwentySeven = Transaction::create([
         	'reference' => strtoupper(str_random(6)),
             'requested_by' => 'April Laraya',
@@ -343,6 +421,9 @@ class TransactionsTableSeeder extends Seeder
             'vehicle_type_id' => 1, 
             'agency_id' => 3,
         ]);
+
+        $user = User::where('id', 43)->first();
+        $user->transactions()->attach($agentTwentySeven);
 
         $agent->save();
         $agentToo->save();
@@ -379,5 +460,10 @@ class TransactionsTableSeeder extends Seeder
         $agentTwentyFive->save();
         $agentTwentySix->save();
         $agentTwentySeven->save();
+
+        for($x = 17, $x <= 43, $x++){
+            $user = User::where('id', $x)->first();
+            $user->transactions()->attach($transaction);
+        }
     }
 }
