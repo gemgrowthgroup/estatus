@@ -48,7 +48,7 @@ class TransactionsTableSeeder extends Seeder
         ]);
 
         $user = User::where('id', 18)->first();
-        $user->transactions()->attach($agentTwo);
+        $user->transactions()->attach($agentToo);
 
         $agentThree = Transaction::create([
         	'reference' => strtoupper(str_random(6)),
