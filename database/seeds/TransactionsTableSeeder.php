@@ -461,9 +461,6 @@ class TransactionsTableSeeder extends Seeder
         $agentTwentySix->save();
         $agentTwentySeven->save();
 
-        for($x = 17, $x <= 43, $x++){
-            $user = User::where('id', $x)->first();
-            $user->transactions()->attach($transaction);
-        }
+        
     }
 }
